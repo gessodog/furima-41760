@@ -73,4 +73,4 @@
 
 ### Association
 
-- belongs_to :shipping
+- belongs_to :card
