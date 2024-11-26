@@ -64,7 +64,7 @@
 | prefecture_id     | integer    | null: false                    |
 | city              | string     | null: false                    |
 | house_number      | string     | null: false                    |
-| building          | string     | null: false                    |
+| building          | string     |                                |
 | telephone_number  | integer    | null: false                    |
 | card              | references | null: false, foreign_key: true |
 
