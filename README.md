@@ -50,12 +50,6 @@
 | card_information  | integer    | null: false                    |
 | card_deadline     | string     | null: false                    |
 | card_securitycode | integer    | null: false                    |
-| zipcode           | string     | null: false                    |
-| prefecture_id     | integer    | null: false                    |
-| city              | string     | null: false                    |
-| house_number      | string     | null: false                    |
-| building          | string     | null: false                    |
-| telephone_number  | integer    | null: false                    |
 | user              | references | null: false, foreign_key: true |
 | item              | references | null: false, foreign_key: true |
 
@@ -63,3 +57,22 @@
 
 - belongs_to :user
 - belongs_to :item
+- has_one :shipping
+
+
+
+## shippings テーブル
+
+| Column            | Type       | Options                        |
+| ----------------- | ---------- | ------------------------------ |
+| zipcode           | string     | null: false                    |
+| prefecture_id     | integer    | null: false                    |
+| city              | string     | null: false                    |
+| house_number      | string     | null: false                    |
+| building          | string     | null: false                    |
+| telephone_number  | integer    | null: false                    |
+| card              | references | null: false, foreign_key: true |
+
+### Association
+
+- belongs_to :shipping
