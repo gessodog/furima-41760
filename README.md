@@ -39,7 +39,7 @@
 ### Association
 
 - belongs_to :user
-- has_one :cards
+- has_one :card
 
 
 
