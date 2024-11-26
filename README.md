@@ -16,7 +16,7 @@
 ### Association
 
 - has_many :items
-- has_many :cards
+- has_many :buys
 
 
 
@@ -37,17 +37,14 @@
 ### Association
 
 - belongs_to :user
-- has_one :card
+- has_one :buy
 
 
 
-## cards テーブル
+## buys テーブル
 
 | Column            | Type       | Options                        |
 | ----------------- | ---------- | ------------------------------ |
-| card_information  | integer    | null: false                    |
-| card_deadline     | string     | null: false                    |
-| card_securitycode | integer    | null: false                    |
 | user              | references | null: false, foreign_key: true |
 | item              | references | null: false, foreign_key: true |
 
@@ -73,4 +70,4 @@
 
 ### Association
 
-- belongs_to :card
+- belongs_to :buy
