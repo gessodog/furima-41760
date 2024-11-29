@@ -109,6 +109,11 @@ RSpec.describe User, type: :model do
         @user.valid?
         expect(@user.errors.full_messages).to include("Birth can't be blank")
       end
+      it 'birthが空だと登録できない' do
+        @user.birth = ' '
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Birth can't be blank")
+      end
     end
   end
 end
