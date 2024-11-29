@@ -8,12 +8,12 @@ class User < ApplicationRecord
   validates :birth,           presence: true
   validate :password_complexity
 
-  with_options presence: true, format: { with: /\A[ぁ-んァ-ヶ一-龥々ー]+\z/, message: 'must including one letter, one number' } do
+  with_options presence: true, format: { with: /\A[ぁ-んァ-ヶ一-龥々ー]+\z/, message: 'must be full-width characters(Kanji,Hiragana,Katakana)' } do
     validates :first_name
     validates :last_name
   end
 
-  with_options presence: true, format: { with: /\A[ァ-ヶー]+\z/, message: 'must be full-width characters' } do
+  with_options presence: true, format: { with: /\A[ァ-ヶー]+\z/, message: 'must be full-width characters(Katakana)' } do
     validates :first_name_kana
     validates :last_name_kana
   end
