@@ -9,6 +9,7 @@ class Item < ApplicationRecord
   belongs_to :user
   has_one_attached :image
 
+  validates :image,            presence: true
   validates :item_name,        presence: true
   validates :item_information, presence: true
   validates :item_category_id, numericality: { other_than: 1 , message: "can't be blank"}
@@ -17,6 +18,15 @@ class Item < ApplicationRecord
   validates :prefecture_id,    numericality: { other_than: 1 , message: "can't be blank"}
   validates :delivery_day_id,  numericality: { other_than: 1 , message: "can't be blank"}
   validates :price,            presence: true
-  validates :image,            presence: true
+  validate :price_errors
+
+  private
+
+  def price_errors
+    return if price.blank? || price >= 300 && price <= 9999999
+
+    errors.add(:price, "must be between ¥300 and ¥9,999,999(half-width digits)")
+  end
 end
+
 
