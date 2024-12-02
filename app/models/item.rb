@@ -12,21 +12,19 @@ class Item < ApplicationRecord
   validates :image,            presence: true
   validates :item_name,        presence: true
   validates :item_information, presence: true
-  validates :item_category_id, numericality: { other_than: 1 , message: "can't be blank"}
-  validates :item_state_id,    numericality: { other_than: 1 , message: "can't be blank"}
-  validates :delivery_cost_id, numericality: { other_than: 1 , message: "can't be blank"}
-  validates :prefecture_id,    numericality: { other_than: 1 , message: "can't be blank"}
-  validates :delivery_day_id,  numericality: { other_than: 1 , message: "can't be blank"}
+  validates :item_category_id, numericality: { other_than: 1, message: "can't be blank" }
+  validates :item_state_id,    numericality: { other_than: 1, message: "can't be blank" }
+  validates :delivery_cost_id, numericality: { other_than: 1, message: "can't be blank" }
+  validates :prefecture_id,    numericality: { other_than: 1, message: "can't be blank" }
+  validates :delivery_day_id,  numericality: { other_than: 1, message: "can't be blank" }
   validates :price,            presence: true
   validate :price_errors
 
   private
 
   def price_errors
-    return if price.blank? || price >= 300 && price <= 9999999
+    return if price.blank? || price >= 300 && price <= 9_999_999
 
-    errors.add(:price, "must be between ¥300 and ¥9,999,999(half-width digits)")
+    errors.add(:price, 'must be between ¥300 and ¥9,999,999(half-width digits)')
   end
 end
-
-
