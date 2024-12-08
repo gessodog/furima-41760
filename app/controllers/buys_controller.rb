@@ -1,8 +1,9 @@
 class BuysController < ApplicationController
 
   def index
-    @buy = Buy.new
-    @item = Item.find(params[:item_id])
+    # @buy = Buy.new
+    # @item = Item.find(params[:item_id])
+    @form_object = FormObject.new
   end
 
   def create
