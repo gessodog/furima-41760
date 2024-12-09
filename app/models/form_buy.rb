@@ -21,12 +21,12 @@ class FormBuy
   def validate_zipcode
     return if zipcode.blank? || zipcode =~ /\A[0-9]{3}-[0-9]{4}\z/
 
-    errors.add(:zipcode, 'is Include hyphen(-)')
+    errors.add(:zipcode, 'is Include hyphen(-) and numbers(half-width digits)')
   end
 
   def telephone_number_errors
     return if telephone_number.blank? || telephone_number =~ /\A\d{10,11}\z/
 
-    errors.add(:telephone_number, 'is must be 10 or 11 numbers')
+    errors.add(:telephone_number, 'is must be 10 or 11 numbers(half-width digits)')
   end
 end
