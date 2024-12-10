@@ -66,6 +66,11 @@ RSpec.describe FormBuy, type: :model do
         @form_buy.valid?
         expect(@form_buy.errors.full_messages).to include("Telephone number is must be 10 or 11 numbers(half-width digits)")
       end
+      it 'tokenが空では保存できないこと' do
+        @form_buy.token = ''
+        @form_buy.valid?
+        expect(@form_buy.errors.full_messages).to include("Token can't be blank")
+      end
     end
   end
 end

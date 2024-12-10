@@ -2,7 +2,7 @@ class FormBuy
   include ActiveModel::Model
   attr_accessor :zipcode, :prefecture_id, :city, :house_number, :building, :telephone_number, :user_id, :item_id, :buy_id, :token
 
-  
+  validates :token, presence: true
   validates :zipcode,          presence: true
   validate :validate_zipcode
   validates :prefecture_id,    numericality: { other_than: 1, message: "can't be blank" }
