@@ -4,7 +4,7 @@ class BuysController < ApplicationController
   before_action :move_to_index, only: [:index, :create]
 
   def index
-    gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
+    gon.public_key = ENV['PAYJP_PUBLIC_KEY']
     @form_buy = FormBuy.new
   end
 
@@ -13,24 +13,27 @@ class BuysController < ApplicationController
     if @form_buy.valid?
       pay_item
       @form_buy.save
-      return redirect_to root_path
+      redirect_to root_path
     else
-      gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
+      gon.public_key = ENV['PAYJP_PUBLIC_KEY']
       render 'index', status: :unprocessable_entity
     end
   end
 
   private
+
   def buy_params
-    params.require(:form_buy).permit(:zipcode, :prefecture_id, :city, :house_number, :building, :telephone_number).merge(user_id: current_user.id, item_id: params[:item_id], token: params[:token])
+    params.require(:form_buy).permit(:zipcode, :prefecture_id, :city, :house_number, :building, :telephone_number).merge(
+      user_id: current_user.id, item_id: params[:item_id], token: params[:token]
+    )
   end
 
   def pay_item
-    Payjp.api_key = ENV["PAYJP_SECRET_KEY"]  
+    Payjp.api_key = ENV['PAYJP_SECRET_KEY']
     Payjp::Charge.create(
-      amount: @item.price,  
+      amount: @item.price,
       card: buy_params[:token],
-      currency: 'jpy'               
+      currency: 'jpy'
     )
   end
 
@@ -38,7 +41,7 @@ class BuysController < ApplicationController
     return if current_user.id != @item.user_id && !Buy.exists?(item_id: @item.id)
 
     redirect_to root_path
-  end 
+  end
 
   def set_item
     @item = Item.find(params[:item_id])

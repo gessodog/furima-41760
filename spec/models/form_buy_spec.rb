@@ -24,12 +24,12 @@ RSpec.describe FormBuy, type: :model do
       it 'zipcodeは間にハイフンが含まれていないと保存できない' do
         @form_buy.zipcode = '1234567'
         @form_buy.valid?
-        expect(@form_buy.errors.full_messages).to include("Zipcode is Include hyphen(-) and numbers(half-width digits)")
+        expect(@form_buy.errors.full_messages).to include('Zipcode is Include hyphen(-) and numbers(half-width digits)')
       end
       it 'zipcodeは半角数字でないと保存できない' do
         @form_buy.zipcode = 'abc-defg'
         @form_buy.valid?
-        expect(@form_buy.errors.full_messages).to include("Zipcode is Include hyphen(-) and numbers(half-width digits)")
+        expect(@form_buy.errors.full_messages).to include('Zipcode is Include hyphen(-) and numbers(half-width digits)')
       end
       it 'prefecture_idが空では保存できない' do
         @form_buy.prefecture_id = ''
@@ -59,12 +59,12 @@ RSpec.describe FormBuy, type: :model do
       it 'telephone_numberはハイフンが含まれていると保存できない' do
         @form_buy.telephone_number = '090-1111-2222'
         @form_buy.valid?
-        expect(@form_buy.errors.full_messages).to include("Telephone number is must be 10 or 11 numbers(half-width digits)")
+        expect(@form_buy.errors.full_messages).to include('Telephone number is must be 10 or 11 numbers(half-width digits)')
       end
       it 'telephone_numberは半角数字でないと保存できない' do
         @form_buy.telephone_number = 'abcddddeeee'
         @form_buy.valid?
-        expect(@form_buy.errors.full_messages).to include("Telephone number is must be 10 or 11 numbers(half-width digits)")
+        expect(@form_buy.errors.full_messages).to include('Telephone number is must be 10 or 11 numbers(half-width digits)')
       end
       it 'tokenが空では保存できないこと' do
         @form_buy.token = ''
