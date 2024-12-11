@@ -10,6 +10,8 @@ class FormBuy
   validates :house_number,     presence: true
   validates :telephone_number, presence: true
   validate :telephone_number_errors
+  validates :user_id, presence: true
+  validates :item_id, presence: true
 
   def save
     buy = Buy.create(user_id: user_id, item_id: item_id)
