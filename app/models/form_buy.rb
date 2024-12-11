@@ -2,16 +2,18 @@ class FormBuy
   include ActiveModel::Model
   attr_accessor :zipcode, :prefecture_id, :city, :house_number, :building, :telephone_number, :user_id, :item_id, :buy_id, :token
 
-  validates :token, presence: true
-  validates :zipcode, presence: true
+  with_options presence: true do
+    validates :token
+    validates :zipcode
+    validates :prefecture_id,    numericality: { other_than: 1, message: "can't be blank" }
+    validates :city
+    validates :house_number
+    validates :telephone_number
+    validates :user_id
+    validates :item_id
+  end
   validate :validate_zipcode
-  validates :prefecture_id,    numericality: { other_than: 1, message: "can't be blank" }
-  validates :city,             presence: true
-  validates :house_number,     presence: true
-  validates :telephone_number, presence: true
   validate :telephone_number_errors
-  validates :user_id, presence: true
-  validates :item_id, presence: true
 
   def save
     buy = Buy.create(user_id: user_id, item_id: item_id)
