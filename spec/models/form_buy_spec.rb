@@ -2,9 +2,9 @@ require 'rails_helper'
 
 RSpec.describe FormBuy, type: :model do
   before do
-    user = FactoryBot.create(:user)
-    item = FactoryBot.create(:item)
-    @form_buy = FactoryBot.build(:form_buy, user_id: user.id, item_id: item.id)
+    @user = FactoryBot.create(:user)
+    @item = FactoryBot.create(:item)
+    @form_buy = FactoryBot.build(:form_buy, user_id: @user.id, item_id: @item.id)
   end
 
   describe '商品購入機能' do
@@ -82,6 +82,16 @@ RSpec.describe FormBuy, type: :model do
         @form_buy.token = ''
         @form_buy.valid?
         expect(@form_buy.errors.full_messages).to include("Token can't be blank")
+      end
+      it 'user_idが空では保存できないこと' do
+        @form_buy.user_id = ''
+        @form_buy.valid?
+        expect(@form_buy.errors.full_messages).to include("User can't be blank")
+      end
+      it 'item_idが空では保存できないこと' do
+        @form_buy.item_id = ''
+        @form_buy.valid?
+        expect(@form_buy.errors.full_messages).to include("Item can't be blank")
       end
     end
   end
