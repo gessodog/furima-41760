@@ -1,13 +1,14 @@
 class BuysController < ApplicationController
+  before_action :authenticate_user!, only: [:index, :create]
+  before_action :set_item, only: [:index, :create]
+  before_action :move_to_index, only: [:index, :create]
 
   def index
     gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
-    @item = Item.find(params[:item_id])
     @form_buy = FormBuy.new
   end
 
   def create
-    @item = Item.find(params[:item_id])
     @form_buy = FormBuy.new(buy_params)
     if @form_buy.valid?
       pay_item
@@ -31,5 +32,15 @@ class BuysController < ApplicationController
       card: buy_params[:token],
       currency: 'jpy'               
     )
+  end
+
+  def move_to_index
+    return if current_user.id != @item.user_id && !Buy.exists?(item_id: @item.id)
+
+    redirect_to root_path
+  end 
+
+  def set_item
+    @item = Item.find(params[:item_id])
   end
 end
