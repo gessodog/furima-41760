@@ -52,4 +52,5 @@ class Prefecture < ActiveHash::Base
 
   include ActiveHash::Associations
   has_many :ietms
+  has_many :buys
 end

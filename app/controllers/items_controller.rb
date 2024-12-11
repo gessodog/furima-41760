@@ -2,6 +2,7 @@ class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
   before_action :set_item, only: [:show, :edit, :update, :destroy]
   before_action :move_to_index, only: [:edit, :update, :destroy]
+  before_action :set_buy, only: [:index, :show]
 
   def index
     @item = Item.order(created_at: :desc)
@@ -47,12 +48,16 @@ class ItemsController < ApplicationController
   end
 
   def move_to_index
-    return if current_user.id == @item.user_id
+    return if current_user.id == @item.user_id && !Buy.exists?(item_id: @item.id)
 
     redirect_to action: :index
   end
 
   def set_item
     @item = Item.find(params[:id])
+  end
+
+  def set_buy
+    @buy = Buy.all
   end
 end
